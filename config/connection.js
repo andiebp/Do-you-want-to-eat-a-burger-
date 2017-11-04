@@ -5,15 +5,16 @@ var connection = require('mysql').createConnection({
 	database: 'burgers_db'
 });
 
-function query(statement, callback) {
-	connection.connect(function (err) {
+connection.connect(function (err) {
+	if (err) throw err;
+	console.log("Connected to DB.");
+});
+
+var query = function (statement, callback) {
+	connection.query(statement, function (err, rows, fields) {
 		if (err) throw err;
-		connection.query(statement, function (err, rows, fields) {
-			connection.end();
-			if (err) throw err;
-			callback(rows, fields);
-		});
+		callback(rows, fields);
 	});
 }
 
-module.export = query;
+module.exports = query;
