@@ -5,7 +5,7 @@ router.get("/", function (req, res) {
 	burger.getAll(function (data) {
 		res.render("index", {
 			burgers: data
-		};);
+		});
 	});
 });
 
